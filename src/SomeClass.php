@@ -8,6 +8,6 @@ final class SomeClass
 {
     public function test(): int
     {
-        return 2;
+        return 2; // to trigger tests-checker
     }
 }
