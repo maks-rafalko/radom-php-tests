@@ -6,7 +6,7 @@ on:
     branches: master
 
 jobs:
-  import-gpg:
+  release:
     runs-on: ubuntu-latest
     steps:
       -
@@ -21,3 +21,13 @@ jobs:
       -
         name: List keys
         run: gpg -K
+
+      - name: Sign the PHAR
+        # if: github.event_name == 'release'
+        run: |
+          gpg --local-user maks.rafalko@gmail.com \
+              --yes \
+              --passphrase="${{ secrets.GPG_PASSPHRASE }}" \
+              --detach-sign \
+              --output phpstan.neon.asc \
+              phpstan.neon
